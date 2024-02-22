@@ -1,1 +1,3 @@
 *.exe
+CMakeFiles
+CMakeCache.txt
