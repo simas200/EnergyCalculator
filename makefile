@@ -1,6 +1,6 @@
-CXX = gcc
+CXX = g++
 CFLAGS = -Wall -g 
-LIBS = -lstdc++
+LIBS =
 TARGET = src/energy_calculator.cpp src/genList.cpp src/generator.cpp src/combs.cpp
 MAIN = energy_calculator
 
