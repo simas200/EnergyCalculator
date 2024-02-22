@@ -1,3 +1,4 @@
 *.exe
+build
 CMakeFiles
 CMakeCache.txt
