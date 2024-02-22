@@ -9,6 +9,7 @@ namespace energy_generator {
         static energy_generator::Generator GEN_LIST[7];
         static const int MAX_HEAT;
         static const int MAX_SPACE;
+        static const int LENGTH;
     };
 }
 #endif /* GEN_CONSTS_CLASS */ 

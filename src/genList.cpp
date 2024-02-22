@@ -16,3 +16,4 @@ Generator GEN_CONSTS::GEN_LIST[7] = {
 
 const int GEN_CONSTS::MAX_HEAT = 600;
 const int GEN_CONSTS::MAX_SPACE = 340;
+const int GEN_CONSTS::LENGTH = Generator().getId();
