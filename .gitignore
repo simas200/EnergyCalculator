@@ -1,4 +1,5 @@
 *.exe
-build
-CMakeFiles
+build/
+CMakeFiles/
 CMakeCache.txt
+.vscode
