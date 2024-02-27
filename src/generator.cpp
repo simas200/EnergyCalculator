@@ -34,6 +34,6 @@ int Generator::getId() { return this->gen_id; }
 
 std::string Generator::to_string(){
     std::string myString;
-    myString = std::to_string(this->id) + ". " + this->name + ": power " + std::to_string(this->power) + ", space " + std::to_string(this->space)+ ", heat " + std::to_string(this->heat);
+    myString = std::to_string(this->gen_id) + ". " + this->name + ": power " + std::to_string(this->power) + ", space " + std::to_string(this->space)+ ", heat " + std::to_string(this->heat);
     return myString; 
 }

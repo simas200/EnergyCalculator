@@ -5,4 +5,4 @@ set(CMAKE_CXX_COMPILER "C:/msys64/ucrt64/bin/g++.exe")
 
 project(energyClaculator VERSION 0.1)
 
-add_executable(energy_calculator src/energy_calculator.cpp src/genList.cpp src/generator.cpp src/combs.cpp)
+add_executable(energy_calculator src/energy_calculator.cpp src/genList.cpp src/generator.cpp)

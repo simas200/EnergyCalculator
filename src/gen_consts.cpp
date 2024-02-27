@@ -1,4 +1,4 @@
-#include "genList.h"
+#include "gen_consts.h"
 #include "generator.h"
 #include <string>
 
@@ -15,5 +15,5 @@ Generator GEN_CONSTS::GEN_LIST[7] = {
 };
 
 const int GEN_CONSTS::MAX_HEAT = 600;
-const int GEN_CONSTS::MAX_SPACE = 340;
-const int GEN_CONSTS::LENGTH = Generator().getId();
+const int GEN_CONSTS::MAX_SPACE = 10;
+const int GEN_CONSTS::LENGTH = 7; 
