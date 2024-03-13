@@ -54,8 +54,14 @@ std::string map_to_str(std::map<int,int> myMap){
 
 int main(){
     std::vector<std::map<int, int>> combs[GEN_CONSTS::LENGTH];
+    std::sort(GEN_CONSTS::GEN_LIST, GEN_CONSTS::GEN_LIST+GEN_CONSTS::LENGTH, compGenSpace);
     for(int i = 0; i < GEN_CONSTS::LENGTH; i++){
-        combs[i].push_back(std::map<int, int>());
+        int genId = GEN_CONSTS::GEN_LIST[i].getId();
+        std::map<int, int> newMap
+        {
+            {genId, 1}
+        };
+        combs[i].push_back(newMap);
     }
     std::vector<std::map<int, int>> goodCombs;
     for (int i = 0; i < GEN_CONSTS::LENGTH; i++)
@@ -63,7 +69,6 @@ int main(){
         //std::cout << GEN_CONSTS::GEN_LIST[i].to_string() << std::endl;
         //std::cout << "Hello, World!" << std::endl;
     }
-    std::sort(GEN_CONSTS::GEN_LIST, GEN_CONSTS::GEN_LIST+GEN_CONSTS::LENGTH, compGenSpace);
     int genStart = 0;
     for(int i = 0; i < GEN_CONSTS::MAX_SPACE; i++){
         std::vector<std::map<int, int>> newCombs[GEN_CONSTS::LENGTH];
@@ -83,7 +88,7 @@ int main(){
                     //std::cout << currGen.to_string() << std::endl;
                     std::map<int,int>::iterator it = newComb.find(currGen.getId());
                     if(it != newComb.end()){
-                        newComb.at(GEN_CONSTS::GEN_LIST[l].getId())++;
+                        newComb.at(currGen.getId())++;
                     }else{
                         it = newComb.begin();
                         newComb.insert(it, std::pair<int, int>(currGen.getId(), 1));
@@ -133,16 +138,19 @@ int main(){
         if(pushStart){
             genStart++;
         }
-        /*for (int j = 0; j < GEN_CONSTS::LENGTH; j++) //debug print cleaned combs
+        std::cout << "Current roll " << i << std::endl; //debug print cleaned combs
+        for (int j = 0; j < GEN_CONSTS::LENGTH; j++) 
         {
             std::cout << j << ". ";
             for (int k = 0; k < combs[j].size(); k++)
             {
-                std::cout << map_to_str(combs[j].at(k)) << std::endl;
+                std::cout << map_to_str(combs[j].at(k));
             }
-        }*/
+            std::cout << std::endl;
+        }
     }
     std::cout << "Good combs:" << std::endl;
+    std::sort(goodCombs.begin(), goodCombs.begin() + goodCombs.size());
     for (size_t i = 0; i < goodCombs.size(); i++)
     {
         int currHeat = getCombHeat(goodCombs.at(i), GEN_CONSTS::GEN_LIST, GEN_CONSTS::LENGTH);
