@@ -1,5 +1,8 @@
 *.exe
+energy_calculator
 build/
 CMakeFiles/
 .vscode/
+cmake_install.cmake
 CMakeCache.txt
+Makefile

@@ -15,5 +15,5 @@ Generator GEN_CONSTS::GEN_LIST[7] = {
 };
 
 const int GEN_CONSTS::MAX_HEAT = 600;
-const int GEN_CONSTS::MAX_SPACE = 10;
+const int GEN_CONSTS::MAX_SPACE = 50;
 const int GEN_CONSTS::LENGTH = 7; 
