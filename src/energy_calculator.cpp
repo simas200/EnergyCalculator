@@ -1,17 +1,15 @@
 #include "generator.h"
 #include "gen_consts.h"
+//#include "energy_calculator.h"
 
 #include <map>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <bits/stdc++.h>
+#include <cmath>
 
 using namespace energy_generator;
-
-bool compGenSpace(Generator g1, Generator g2){
-    return (g1.getSpace() > g2.getSpace());
-}
 
 int getCombSpace(std::map<int,int> comb, Generator genList[], int genCount){
     std::map<int,int>::iterator it;
@@ -35,6 +33,28 @@ int getCombHeat(std::map<int,int> comb, Generator genList[], int genCount){
         }
     }
     return space;
+}
+
+double getCombPower(std::map<int,int> comb, Generator genList[], int genCount){
+    std::map<int,int>::iterator it;
+    double power = 1;
+    for(int i = 0; i < genCount; i++){
+        it = comb.find(genList[i].getId());
+        if(it != comb.end()){
+            power *= pow(genList[i].getPower(),comb.at(genList[i].getId()));
+        }
+    }
+    return power;
+}
+
+bool compGenSpace(Generator g1, Generator g2){
+    return (g1.getSpace() > g2.getSpace());
+}
+
+bool compCombPower(std::map<int, int> m1, std::map<int, int> m2){
+    double p1 = getCombPower(m1, GEN_CONSTS::GEN_LIST, GEN_CONSTS::LENGTH);
+    double p2 = getCombPower(m2, GEN_CONSTS::GEN_LIST, GEN_CONSTS::LENGTH);
+    return (p1 > p2);
 }
 
 std::string map_to_str(std::map<int,int> myMap){
@@ -129,7 +149,7 @@ int main(){
                     if(pushStart) continue;
                     if (newCombs[j].at(k).size() == 1)
                     {
-                        std::cout << "Push start" << std::endl;
+                        //std::cout << "Push start" << std::endl;
                         pushStart = true;
                     }
                 }
@@ -139,7 +159,7 @@ int main(){
             genStart++;
         }
         std::cout << "Current roll " << i << std::endl; //debug print cleaned combs
-        for (int j = 0; j < GEN_CONSTS::LENGTH; j++) 
+        /*for (int j = 0; j < GEN_CONSTS::LENGTH; j++) 
         {
             std::cout << j << ". ";
             for (int k = 0; k < combs[j].size(); k++)
@@ -147,14 +167,16 @@ int main(){
                 std::cout << map_to_str(combs[j].at(k));
             }
             std::cout << std::endl;
-        }
+        }*/
     }
     std::cout << "Good combs:" << std::endl;
-    std::sort(goodCombs.begin(), goodCombs.begin() + goodCombs.size());
-    for (size_t i = 0; i < goodCombs.size(); i++)
+    std::sort(goodCombs.begin(), goodCombs.begin() + goodCombs.size(), compCombPower);
+    int goodLen = (goodCombs.size() < 10) ? goodCombs.size() : 10;
+    for (int i = 0; i < goodLen; i++)
     {
         int currHeat = getCombHeat(goodCombs.at(i), GEN_CONSTS::GEN_LIST, GEN_CONSTS::LENGTH);
-        std::cout << map_to_str(goodCombs.at(i)) << currHeat << std::endl;
+        double currPower = getCombPower(goodCombs.at(i), GEN_CONSTS::GEN_LIST, GEN_CONSTS::LENGTH);
+        std::cout << map_to_str(goodCombs.at(i)) << currPower << std::endl;
     }
    return 0; 
 }
